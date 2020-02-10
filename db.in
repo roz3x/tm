@@ -1,0 +1,21 @@
+# this is comment 
+# initialize a user like this
+u shivang 
+u sid
+u mohit
+u guleri 
+u jai 
+
+# add transactions like this 
+i 0 50  # for the bus 
+i 4 8000 
+
+# print ones data like this 
+p 0
+p 1
+p 2 
+p 3
+p 4
+
+# must end 
+e
