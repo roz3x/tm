@@ -1,0 +1,22 @@
+# this is comment 
+# initialize a user like this
+u shivang 
+u sid
+u mohit
+u guleri 
+u jai 
+
+# add transactions like this 
+i shivang 50  # for the bus 
+i sid 8000  # for mommy issues 
+# add transactions here 
+
+# print ones data like this 
+p jai
+p shivang
+p sid
+p mohit
+p guleri
+
+# must end 
+e

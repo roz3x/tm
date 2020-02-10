@@ -20,7 +20,22 @@ int main() {
 		#endif
 		scanf("%s",input_buffer);
 		if ( strcmp (input_buffer, "i" ) == 0 ) {
-			scanf("%d",&input_int_buffer);
+			#ifdef USE_NAME
+			scanf("%s", input_buffer);
+			for ( int i = 0 ; i < users_size ; i++ ) {
+				if ( strcmp (users[i].name,input_buffer) == 0 ) {
+					input_int_buffer = i;
+					goto exit_loop;
+				}
+			}
+			printf("sorry cant find the user %s\n",input_buffer);
+			continue;
+			exit_loop:
+			#endif
+			#ifdef USE_NUMBER
+				scanf("%d",&input_int_buffer);	
+			#endif
+
 			if (input_int_buffer > users_size-1) {
 				printf("wrong user value");
 				return EXIT_FAILURE;
@@ -31,16 +46,35 @@ int main() {
 			for ( int i = 0 ; i < users_size ; i++ ) {
 				users[i].balance -= input_int_buffer/users_size ;
 				users[user_number].trans[i] += input_int_buffer/users_size ;
+				users[i].trans[user_number] -= input_int_buffer/users_size ;
 			}
 			users[user_number].balance +=  2 * (input_int_buffer/users_size) ;
 		} else if ( strcmp ( input_buffer ,"e" ) == 0 ) {
 			exit(EXIT_SUCCESS);
 		} else if ( strcmp ( input_buffer ,"p" ) == 0 ) {
-			scanf("%d",&input_int_buffer);
-			printf("%s has %d money\n" ,users[input_int_buffer].name , users[input_int_buffer].balance);
+			#ifdef USE_NAME
+			scanf("%s", input_buffer);
+			for ( int i = 0 ; i < users_size ; i++ ) {
+				if ( strcmp (users[i].name,input_buffer) == 0 ) {
+					input_int_buffer = i;
+					goto exit_loop_1;
+				}
+			}
+			printf("sorry cant find the user %s\n",input_buffer);
+			continue;
+exit_loop_1:
+			#endif
+			#ifdef USE_NUMBER
+				scanf("%d",&input_int_buffer);	
+			#endif
+			printf("%s has total  %d $$$$ \n" ,users[input_int_buffer].name , users[input_int_buffer].balance);
 			for ( int  i = 0 ; i < users_size ; i++ ) {
 				if ( i == input_int_buffer ) continue ; 
-				printf("%d$ from %s \n",users[input_int_buffer].trans[i] , users[i].name);
+				if ( users[input_int_buffer].trans[i] > 0 ) {
+					printf(" ++++ %d$ from %s \n",users[input_int_buffer].trans[i] , users[i].name);
+				} else { 
+					printf(" ---- %d$ to   %s \n", -users[input_int_buffer].trans[i] , users[i].name);
+				}
 			}
 		} else if ( strcmp ( input_buffer , "u" ) == 0 ) {
 			scanf("%s",input_buffer);
